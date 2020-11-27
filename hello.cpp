@@ -26,26 +26,36 @@ listCapacity = 2;
 listSize = 0;
 }
 bool list::insert(int item){
+
 if(listSize == listCapacity){
-int ** newArrayList = new int*[listCapacity*2];
-for(int i = 0; i < listSize; i++){
-newArrayList[i] = new int[1];
+	listCapacity *= 2;
+	int ** newArrayList = new int*[listCapacity];
+
+	for(int i = 0; i < listCapacity; i++){
+	newArrayList[i] = new int[1];
+	}
+	for(int i = 0; i < listSize; i++){
+	newArrayList[i][0] = arrayList[i][0];
+	}
+	
+	int ** temp = arrayList;
+
+	arrayList = newArrayList;
+
+	for(int i = 0; i < listSize; i++){
+	delete[] temp[i];
+	} 
+//delete[] temp;
+	arrayList[listSize][0] = item;
+	listSize++;
+return true;
 }
-int ** temp = newArrayList;
-arrayList = newArrayList;
-for(int i = 0; i < listSize; i++){
-arrayList[i] = newArrayList[i];
-delete[] temp[i];
-} 
-delete[] temp;
+///*/
 arrayList[listSize][0] = item;
 listSize++;
 return true;
 }
-arrayList[listSize][0] = item;
-listSize++;
-return true;
-}
+
 void list::removeFirstInstance(int item){
 //find index
 //save it, so we can check an index, for get() 
@@ -91,6 +101,7 @@ list myList;
 //cout<< myList.m << endl;
 for(int i = 1; i <= 100; i++){
 myList.insert(i);
+cout<< i << endl;
 }
 
 myList.removeFirstInstance(69);
