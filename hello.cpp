@@ -45,7 +45,7 @@ if(listSize == listCapacity){
 	for(int i = 0; i < listSize; i++){
 	delete[] temp[i];
 	} 
-//delete[] temp;
+    delete[] temp;
 	arrayList[listSize][0] = item;
 	listSize++;
 return true;
