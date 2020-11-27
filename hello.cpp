@@ -29,11 +29,12 @@ bool list::insert(int item){
 if(listSize == listCapacity){
 int ** newArrayList = new int*[listCapacity*2];
 for(int i = 0; i < listSize; i++){
-newArrayList[i] = arrayList[i];
+newArrayList[i] = new int[1];
 }
-int ** temp = arrayList;
+int ** temp = newArrayList;
 arrayList = newArrayList;
 for(int i = 0; i < listSize; i++){
+arrayList[i] = newArrayList[i];
 delete[] temp[i];
 } 
 delete[] temp;
@@ -84,7 +85,6 @@ using namespace std;
 
 int main()
 {
-
 
 cout << "Hello world" << endl;
 list myList;
